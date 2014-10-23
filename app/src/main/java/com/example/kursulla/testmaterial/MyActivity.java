@@ -1,6 +1,7 @@
 package com.example.kursulla.testmaterial;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,35 +11,54 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 
 public class MyActivity extends ActionBarActivity {
 
     private static final String TAG = "MyActivity";
-
+    private ScrollViewWithListener scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
-        setSupportActionBar(toolbar);
 
+        scrollView = (ScrollViewWithListener) findViewById(R.id.scroll_container);
+
+//        final Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+//        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            setToolbarTopMargin(toolbar);
-        }
-
-
-//        DrawInsetsFrameLayout drawInsetsFrameLayout = (DrawInsetsFrameLayout) findViewById(R.id.my_draw_insets_layout);
-//        drawInsetsFrameLayout.setOnInsetsCallback(new DrawInsetsFrameLayout.OnInsetsCallback() {
+//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+//            setToolbarTopMargin(toolbar);
+//        }
+//
+//
+//
+//        scrollView.setOnScrollChangedListener(new ScrollViewWithListener.OnScrollChangedListener() {
 //            @Override
-//            public void onInsetsChanged(Rect insets) {
-//                // Update the map padding (inset the compass, zoom buttons, attribution, etc.)
-//                mGoogleMap.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+//            public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+//                final int headerHeight = findViewById(R.id.text).getTop();
+//                Log.d(TAG,"t="+t+"  oldt="+oldt+" "+  toolbar.getTop());
+//                if(t>oldt) {
+//                    if(toolbar.getTop() > -110) {
+//                        toolbar.setTop(toolbar.getTop() - 10);
+//                        toolbar.setAlpha(toolbar.getAlpha()-0.1f);
+//                    }
+//                }else{
+//                    if(toolbar.getTop() < -2 ) {
+//                        toolbar.setTop(toolbar.getTop() + 10);
+//                        toolbar.setAlpha(toolbar.getAlpha() + 0.1f);
+//                    }
+//                }
+//                if(t == 0 && toolbar.getTop()!= 0){
+//                    Log.d(TAG,"**** toolbar.getTop() = "+ toolbar.getTop());
+////                    toolbar.setTop(0);
+////                    toolbar.setAlpha(1);
+//                }
 //            }
 //        });
 
@@ -61,6 +81,8 @@ public class MyActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,RecyclerViewActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

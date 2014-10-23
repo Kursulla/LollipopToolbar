@@ -5,7 +5,8 @@
     tools:context=".MyActivity">
 
 
-    <ScrollView
+    <com.example.kursulla.testmaterial.ScrollViewWithListener
+        android:id="@+id/scroll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,26 +16,26 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:src="@drawable/restaurant" />
+                android:src="@drawable/restaurant"/>
 
             <TextView
+                android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros.
-
-Cras ut accumsan orci, vel mattis sapien. Duis blandit metus orci, vitae ullamcorper nibh mattis eu. Nullam aliquam posuere mauris, at pellentesque quam mattis dignissim. Curabitur nec accumsan justo, ac vulputate augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam aliquet ac mi et mattis. Suspendisse ullamcorper pharetra euismod. Phasellus felis metus, ornare eget ultricies a, venenatis ullamcorper arcu. Praesent molestie odio vel nisl vehicula, eget ultricies lectus dictum. Pellentesque eu mi vel nulla consequat pharetra a id velit. Cras a dignissim nibh. Etiam est metus, dapibus id ex et, pulvinar eleifend est. Maecenas nibh sem, sagittis sit amet congue vitae, euismod in quam. Sed quis eros nec neque pellentesque dignissim ac non magna. Praesent dignissim, magna sed pharetra rutrum, nunc elit ultrices lacus, in rutrum enim eros sed dui." />
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros.Cras ut accumsan orci, vel mattis sapien. Duis blandit metus orci, vitae ullamcorper nibh mattis eu. Nullam aliquam posuere mauris, at pellentesque quam mattis dignissim. Curabitur nec accumsan justo, ac vulputate augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam aliquet ac mi et mattis. Suspendisse ullamcorper pharetra euismod. Phasellus felis metus, ornare eget ultricies a, venenatis ullamcorper arcu. Praesent molestie odio vel nisl vehicula, eget ultricies lectus dictum. Pellentesque eu mi vel nulla consequat pharetra a id velit. Cras a dignissim nibh. Etiam est metus, dapibus id ex et, pulvinar eleifend est. Maecenas nibh sem, sagittis sit amet congue vitae." />
 
         </LinearLayout>
-    </ScrollView>
+    </com.example.kursulla.testmaterial.ScrollViewWithListener>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_awesome_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:minHeight="?attr/actionBarSize"
-        />
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_awesome_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ffffff"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--/>-->
 </RelativeLayout>
