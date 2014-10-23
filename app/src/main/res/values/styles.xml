@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ff37cd42</item>
+        <item name="colorPrimaryDark">#ff2faf38</item>
+        <item name="colorAccent">#ff32b93b</item>
+    </style>
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="android:actionBarStyle">@style/TranslucentActionBar</item>-->
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+    <!--</style>-->
+
+    <!--<style name="TranslucentActionBar" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="android:background">@null</item>-->
+    <!--</style>-->
+
+    <!--<declare-styleable name="DrawInsetsFrameLayout">-->
+        <!--<attr name="insetBackground" format="reference|color" />-->
+    <!--</declare-styleable>-->
+</resources>
