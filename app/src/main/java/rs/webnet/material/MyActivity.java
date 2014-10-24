@@ -38,7 +38,7 @@ public class MyActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle("");
 
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
@@ -49,13 +49,13 @@ public class MyActivity extends ActionBarActivity {
         topMenu = (LinearLayout) findViewById(R.id.top_menu);
         stickyView = (RelativeLayout) findViewById(R.id.sticky_container);
 
-        scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+//        scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         scrollView.setOnScrollChangedListener(new ScrollViewWithListener.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(ScrollView scrollView, int scrollDirection, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
                 KursullaControl.controlToolbarSlideUp(scrollY, oldScrollY, toolbar);
-                KursullaControl.controlStickyView(scrollView, scrollDirection, scrollY, oldScrollY, 200, stickyView);
+                KursullaControl.controlStickyView(scrollView, scrollDirection, scrollY, oldScrollY, 290, stickyView);
             }
         });
 

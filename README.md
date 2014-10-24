@@ -19,7 +19,8 @@ end style it as any other view.
 
 In Activity, you have to assign this Toolbar to ActionBar by
 
-	Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);        	setSupportActionBar(toolbar);
+	Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar); 
+	setSupportActionBar(toolbar);
 
 Any interaction with Toolbar should NOT go through instance of 
 
