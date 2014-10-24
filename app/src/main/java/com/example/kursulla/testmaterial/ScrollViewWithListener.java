@@ -23,11 +23,12 @@ public class ScrollViewWithListener extends ScrollView {
     public ScrollViewWithListener(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
     @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
+    protected void onScrollChanged(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        super.onScrollChanged(scrollX, scrollY, oldScrollX, oldScrollY);
         if (mOnScrollChangedListener != null) {
-            mOnScrollChangedListener.onScrollChanged(this, l, t, oldl, oldt);
+            mOnScrollChangedListener.onScrollChanged(this, scrollX, scrollY, oldScrollX, oldScrollY);
         }
     }
 

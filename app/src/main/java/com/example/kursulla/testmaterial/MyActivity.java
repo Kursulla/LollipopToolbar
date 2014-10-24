@@ -1,6 +1,9 @@
 package com.example.kursulla.testmaterial;
 
+import android.animation.Animator;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,7 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -20,6 +26,7 @@ public class MyActivity extends ActionBarActivity {
     private ScrollViewWithListener scrollView;
     private int scrollingDelta = 0;
     private ImageView photo;
+    private LinearLayout topMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,66 +36,43 @@ public class MyActivity extends ActionBarActivity {
         scrollView = (ScrollViewWithListener) findViewById(R.id.scroll_container);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        getSupportActionBar().setTitle("");
+
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             setToolbarTopMargin(toolbar);
         }
 
-        photo = (ImageView)findViewById(R.id.image);
+        photo = (ImageView) findViewById(R.id.image);
+        topMenu = (LinearLayout) findViewById(R.id.top_menu);
+
 
         scrollView.setOnScrollChangedListener(new ScrollViewWithListener.OnScrollChangedListener() {
             @Override
-            public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-                controlToolbar(t, oldt, toolbar);
-
-//                final int headerHeight = photo.getTop();
-//                Log.d(TAG, "oldt=" + oldt + " -> t=" + t + " | toolbar.getTop() = " + toolbar.getTop());
-//                if (t > oldt) {
-//                    if (scrollingDelta < 0) {
-//                        scrollingDelta = 0;
-//                    }
-//                    if (scrollingDelta > 50 && scrollingDelta != 0) {
-//                        if (toolbar.getTop() > -90) {
-//                            toolbar.setTop(toolbar.getTop() - 10);
-//                            toolbar.setAlpha(toolbar.getAlpha() - 0.2f);
-//                        }
-//                    }
-//                } else {
-//                    if (scrollingDelta > 0) {
-//                        scrollingDelta = 0;
-//                    }
-//                    if (scrollingDelta < -50 && scrollingDelta != 0) {
-//                        if (toolbar.getTop() < 0) {
-//                            toolbar.setTop(toolbar.getTop() + 10);
-//                            toolbar.setAlpha(toolbar.getAlpha() + 0.2f);
-//                        }
-//                    }
-//                }
-//                Log.d(TAG, "scrollingDelta=" + scrollingDelta);
-//                scrollingDelta += t - oldt;
-//
-//                if (t == 0 && toolbar.getTop() != 0) {
-//                    Log.d(TAG, "**** toolbar.getTop() = " + toolbar.getTop() + " and should reset it");
-//                    toolbar.setTop(0);
-//                    toolbar.setAlpha(1);
-//                }
+            public void onScrollChanged(ScrollView who, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                controlToolbar(scrollY, oldScrollY, toolbar);
+                controlPhoto(scrollY, oldScrollY, photo);
+                Log.d(TAG, "Scroll = " + scrollY);
+                Log.d(TAG, "Topmenu = " + topMenu.getY());
+                Log.d(TAG,"photo = "+photo.getY());
             }
         });
 
     }
 
-    private void controlToolbar(int newScrollPosition, int oldScrollPosition, Toolbar toolbar) {
-        final int SCROLL_TRESHOLD = 50;
-        Log.d(TAG, "oldScrollPosition=" + oldScrollPosition + " -> newScrollPosition=" + newScrollPosition + " | toolbar.getTop() = " + toolbar.getTop());
+    private void controlToolbar(int newScrollPosition, int oldScrollPosition, View toolbar) {
+        final int SCROLL_THRESHOLD = 50;
         if (newScrollPosition > oldScrollPosition) {
             if (scrollingDelta < 0) {
                 scrollingDelta = 0;
             }
-            if (scrollingDelta > SCROLL_TRESHOLD && scrollingDelta != 0) {
+            if (scrollingDelta > SCROLL_THRESHOLD && scrollingDelta != 0) {
                 if (toolbar.getTop() > -90) {
                     toolbar.setTop(toolbar.getTop() - 10);
                     toolbar.setAlpha(toolbar.getAlpha() - 0.2f);
@@ -98,23 +82,45 @@ public class MyActivity extends ActionBarActivity {
             if (scrollingDelta > 0) {
                 scrollingDelta = 0;
             }
-            if (scrollingDelta < -SCROLL_TRESHOLD && scrollingDelta != 0) {
+            if (scrollingDelta < -SCROLL_THRESHOLD && scrollingDelta != 0) {
                 if (toolbar.getTop() < 0) {
                     toolbar.setTop(toolbar.getTop() + 10);
                     toolbar.setAlpha(toolbar.getAlpha() + 0.2f);
                 }
             }
         }
-        Log.d(TAG, "scrollingDelta=" + scrollingDelta);
         scrollingDelta += newScrollPosition - oldScrollPosition;
 
         if (newScrollPosition == 0 && toolbar.getTop() != 0) {
-            Log.d(TAG, "**** toolbar.getTop() = " + toolbar.getTop() + " and should reset it");
             toolbar.setTop(0);
             toolbar.setAlpha(1);
         }
     }
+    private void controlPhoto(int newScrollPosition, int oldScrollPosition, final View view) {
+        final int SCROLL_THRESHOLD = 50;
+        if (newScrollPosition > oldScrollPosition) {
+            if (scrollingDelta < 0) {
+                scrollingDelta = 0;
+            }
+            if (scrollingDelta > SCROLL_THRESHOLD && scrollingDelta != 0) {
+                if (view.getTop() <= 90) {
+                    view.setTop(view.getTop() + (newScrollPosition - oldScrollPosition));
+                }
+            }
+        } else {
+            if (scrollingDelta > 0) {
+                scrollingDelta = 0;
+            }
+                if (view.getTop() >= 0) {
+                    view.setTop(view.getTop() - (oldScrollPosition-newScrollPosition));
+                }
+        }
+        scrollingDelta += newScrollPosition - oldScrollPosition;
 
+        if (newScrollPosition == 0 && view.getTop() != 0) {
+            view.animate().y(0).setDuration(100);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,5 +156,9 @@ public class MyActivity extends ActionBarActivity {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    interface ViewPositionListener{
+        void viewPosition(int x,int y);
     }
 }
