@@ -6,6 +6,7 @@ import android.widget.ScrollView;
 
 /**
  * Created by Kursulla on 23/10/14.
+ *
  */
 public class ScrollViewWithListener extends ScrollView {
     public static final int SCROLL_UP = 1;

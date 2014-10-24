@@ -19,10 +19,10 @@ public class MyActivity extends ActionBarActivity {
 
     private static final String TAG = "MyActivity";
     private ScrollViewWithListener scrollView;
-    private int scrollingDelta = 0;
     private ImageView photo;
     private LinearLayout topMenu;
-    private RelativeLayout stickyContainer;
+    private RelativeLayout stickyView;
+    private int scrollingDelta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MyActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Profile");
 
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
@@ -47,130 +47,22 @@ public class MyActivity extends ActionBarActivity {
 
         photo = (ImageView) findViewById(R.id.image);
         topMenu = (LinearLayout) findViewById(R.id.top_menu);
-        stickyContainer = (RelativeLayout) findViewById(R.id.sticky_container);
+        stickyView = (RelativeLayout) findViewById(R.id.sticky_container);
 
         scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         scrollView.setOnScrollChangedListener(new ScrollViewWithListener.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(ScrollView scrollView, int scrollDirection, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                int scrollDelta = Math.abs(scrollY - oldScrollY);
-//                controlToolbarSlideLeft(scrollY, oldScrollY, toolbar);
-                controlView(scrollView.getScrollY(), scrollDirection, scrollDelta, 340, stickyContainer);
 
+                KursullaControl.controlToolbarSlideUp(scrollY, oldScrollY, toolbar);
+                KursullaControl.controlStickyView(scrollView, scrollDirection, scrollY, oldScrollY, 200, stickyView);
             }
         });
 
     }
 
-    private void controlToolbarSlideUp(int newScrollPosition, int oldScrollPosition, View toolbar) {
-        final int SCROLL_THRESHOLD = 50;
-        if (newScrollPosition > oldScrollPosition) {
-            if (scrollingDelta < 0) {
-                scrollingDelta = 0;
-            }
-            if (scrollingDelta > SCROLL_THRESHOLD && scrollingDelta != 0) {
-                if (toolbar.getTop() > -90) {
-                    toolbar.setTop(toolbar.getTop() - 10);
-                    toolbar.setAlpha(toolbar.getAlpha() - 0.2f);
-                }
-            }
-        } else {
-            if (scrollingDelta > 0) {
-                scrollingDelta = 0;
-            }
-            if (scrollingDelta < -SCROLL_THRESHOLD && scrollingDelta != 0) {
-                if (toolbar.getTop() < 0) {
-                    toolbar.setTop(toolbar.getTop() + 10);
-                    toolbar.setAlpha(toolbar.getAlpha() + 0.2f);
-                }
-            }
-        }
-        scrollingDelta += newScrollPosition - oldScrollPosition;
 
-        if (newScrollPosition == 0 && toolbar.getTop() != 0) {
-            toolbar.setTop(0);
-            toolbar.setAlpha(1);
-        }
-    }
-    private void controlToolbarSlideLeft(int newScrollPosition, int oldScrollPosition, View toolbar) {
-        final int MOVING_SPEED = 2;
-        final float ALPHA_SPEED = 0.1f;
-        final int REMOVE_THRESHOLD = 200;
-        final int SHOW_THRESHOLD = 50;
-        if (newScrollPosition > oldScrollPosition) {
-            if (scrollingDelta < 0) {
-                scrollingDelta = 0;
-            }
-            if (scrollingDelta > REMOVE_THRESHOLD && scrollingDelta != 0) {
-                if (toolbar.getLeft() > -90) {
-                    toolbar.setLeft(toolbar.getLeft() - MOVING_SPEED);
-                    toolbar.setAlpha(toolbar.getAlpha() - ALPHA_SPEED);
-                }
-            }
-        } else {
-            if (scrollingDelta > 0) {
-                scrollingDelta = 0;
-            }
-            if (scrollingDelta < - SHOW_THRESHOLD && scrollingDelta != 0) {
-                if (toolbar.getLeft() < 0) {
-                    toolbar.setLeft(toolbar.getLeft() + MOVING_SPEED);
-                    toolbar.setAlpha(toolbar.getAlpha() + ALPHA_SPEED);
-                }
-            }
-        }
-        scrollingDelta += newScrollPosition - oldScrollPosition;
 
-        if (newScrollPosition == 0 && toolbar.getLeft() != 0) {
-            toolbar.setLeft(0);
-            toolbar.setAlpha(1);
-        }
-    }
-
-    private void controlPhoto(int newScrollPosition, int oldScrollPosition, final View view) {
-        final int SCROLL_THRESHOLD = 50;
-        if (newScrollPosition > oldScrollPosition) {
-            if (scrollingDelta < 0) {
-                scrollingDelta = 0;
-            }
-            if (scrollingDelta > SCROLL_THRESHOLD && scrollingDelta != 0) {
-                if (view.getTop() <= 90) {
-                    view.setTop(view.getTop() + (newScrollPosition - oldScrollPosition));
-                }
-            }
-        } else {
-            if (scrollingDelta > 0) {
-                scrollingDelta = 0;
-            }
-            if (view.getTop() >= 0) {
-                view.setTop(view.getTop() - (oldScrollPosition - newScrollPosition));
-            }
-        }
-        scrollingDelta += newScrollPosition - oldScrollPosition;
-
-        if (newScrollPosition == 0 && view.getTop() != 0) {
-            view.animate().y(0).setDuration(100);
-        }
-    }
-
-    private void controlView(int scrollPosition, int scrollDirection, int scrollDelta, int topOffset, final View view) {
-        if (scrollDirection == ScrollViewWithListener.SCROLL_UP) {
-            if (view.getTop() > -topOffset) {
-                view.setTop(view.getTop() - scrollDelta);
-                if (view.getTop() < -topOffset) {
-                    view.setTop(-topOffset);
-                }
-            }
-        } else {
-            if (scrollPosition < topOffset) {
-                view.setTop(view.getTop() + scrollDelta);
-            }
-        }
-        if (view.getTop() > 0) {
-            view.setTop(0);
-        }
-
-        Log.d(TAG, "scrollPosition = " + scrollView.getScrollY()+" view.getTop() = " + view.getTop() + " view.getHeight()=" + view.getHeight());
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
