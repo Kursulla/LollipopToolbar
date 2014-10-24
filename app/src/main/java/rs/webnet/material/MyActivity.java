@@ -1,9 +1,6 @@
-package com.example.kursulla.testmaterial;
+package rs.webnet.material;
 
-import android.animation.Animator;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,8 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +22,7 @@ public class MyActivity extends ActionBarActivity {
     private int scrollingDelta = 0;
     private ImageView photo;
     private LinearLayout topMenu;
+    private RelativeLayout stickyContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +47,22 @@ public class MyActivity extends ActionBarActivity {
 
         photo = (ImageView) findViewById(R.id.image);
         topMenu = (LinearLayout) findViewById(R.id.top_menu);
+        stickyContainer = (RelativeLayout) findViewById(R.id.sticky_container);
 
-
+        scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         scrollView.setOnScrollChangedListener(new ScrollViewWithListener.OnScrollChangedListener() {
             @Override
-            public void onScrollChanged(ScrollView who, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                controlToolbar(scrollY, oldScrollY, toolbar);
-                controlPhoto(scrollY, oldScrollY, photo);
-                Log.d(TAG, "Scroll = " + scrollY);
-                Log.d(TAG, "Topmenu = " + topMenu.getY());
-                Log.d(TAG,"photo = "+photo.getY());
+            public void onScrollChanged(ScrollView scrollView, int scrollDirection, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                int scrollDelta = Math.abs(scrollY - oldScrollY);
+//                controlToolbarSlideLeft(scrollY, oldScrollY, toolbar);
+                controlView(scrollView.getScrollY(), scrollDirection, scrollDelta, 340, stickyContainer);
+
             }
         });
 
     }
 
-    private void controlToolbar(int newScrollPosition, int oldScrollPosition, View toolbar) {
+    private void controlToolbarSlideUp(int newScrollPosition, int oldScrollPosition, View toolbar) {
         final int SCROLL_THRESHOLD = 50;
         if (newScrollPosition > oldScrollPosition) {
             if (scrollingDelta < 0) {
@@ -96,6 +92,40 @@ public class MyActivity extends ActionBarActivity {
             toolbar.setAlpha(1);
         }
     }
+    private void controlToolbarSlideLeft(int newScrollPosition, int oldScrollPosition, View toolbar) {
+        final int MOVING_SPEED = 2;
+        final float ALPHA_SPEED = 0.1f;
+        final int REMOVE_THRESHOLD = 200;
+        final int SHOW_THRESHOLD = 50;
+        if (newScrollPosition > oldScrollPosition) {
+            if (scrollingDelta < 0) {
+                scrollingDelta = 0;
+            }
+            if (scrollingDelta > REMOVE_THRESHOLD && scrollingDelta != 0) {
+                if (toolbar.getLeft() > -90) {
+                    toolbar.setLeft(toolbar.getLeft() - MOVING_SPEED);
+                    toolbar.setAlpha(toolbar.getAlpha() - ALPHA_SPEED);
+                }
+            }
+        } else {
+            if (scrollingDelta > 0) {
+                scrollingDelta = 0;
+            }
+            if (scrollingDelta < - SHOW_THRESHOLD && scrollingDelta != 0) {
+                if (toolbar.getLeft() < 0) {
+                    toolbar.setLeft(toolbar.getLeft() + MOVING_SPEED);
+                    toolbar.setAlpha(toolbar.getAlpha() + ALPHA_SPEED);
+                }
+            }
+        }
+        scrollingDelta += newScrollPosition - oldScrollPosition;
+
+        if (newScrollPosition == 0 && toolbar.getLeft() != 0) {
+            toolbar.setLeft(0);
+            toolbar.setAlpha(1);
+        }
+    }
+
     private void controlPhoto(int newScrollPosition, int oldScrollPosition, final View view) {
         final int SCROLL_THRESHOLD = 50;
         if (newScrollPosition > oldScrollPosition) {
@@ -111,15 +141,35 @@ public class MyActivity extends ActionBarActivity {
             if (scrollingDelta > 0) {
                 scrollingDelta = 0;
             }
-                if (view.getTop() >= 0) {
-                    view.setTop(view.getTop() - (oldScrollPosition-newScrollPosition));
-                }
+            if (view.getTop() >= 0) {
+                view.setTop(view.getTop() - (oldScrollPosition - newScrollPosition));
+            }
         }
         scrollingDelta += newScrollPosition - oldScrollPosition;
 
         if (newScrollPosition == 0 && view.getTop() != 0) {
             view.animate().y(0).setDuration(100);
         }
+    }
+
+    private void controlView(int scrollPosition, int scrollDirection, int scrollDelta, int topOffset, final View view) {
+        if (scrollDirection == ScrollViewWithListener.SCROLL_UP) {
+            if (view.getTop() > -topOffset) {
+                view.setTop(view.getTop() - scrollDelta);
+                if (view.getTop() < -topOffset) {
+                    view.setTop(-topOffset);
+                }
+            }
+        } else {
+            if (scrollPosition < topOffset) {
+                view.setTop(view.getTop() + scrollDelta);
+            }
+        }
+        if (view.getTop() > 0) {
+            view.setTop(0);
+        }
+
+        Log.d(TAG, "scrollPosition = " + scrollView.getScrollY()+" view.getTop() = " + view.getTop() + " view.getHeight()=" + view.getHeight());
     }
 
     @Override
@@ -136,8 +186,7 @@ public class MyActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, RecyclerViewActivity.class);
-            startActivity(intent);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -158,7 +207,7 @@ public class MyActivity extends ActionBarActivity {
         return result;
     }
 
-    interface ViewPositionListener{
-        void viewPosition(int x,int y);
+    interface ViewPositionListener {
+        void viewPosition(int x, int y);
     }
 }

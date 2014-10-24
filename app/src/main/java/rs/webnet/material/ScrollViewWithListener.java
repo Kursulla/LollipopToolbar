@@ -1,4 +1,4 @@
-package com.example.kursulla.testmaterial;
+package rs.webnet.material;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,9 +8,11 @@ import android.widget.ScrollView;
  * Created by Kursulla on 23/10/14.
  */
 public class ScrollViewWithListener extends ScrollView {
+    public static final int SCROLL_UP = 1;
+    public static final int SCROLL_DOWN = 2;
     private OnScrollChangedListener mOnScrollChangedListener;
     public interface OnScrollChangedListener {
-        void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt);
+        void onScrollChanged(ScrollView scrollView,int scrollDirection, int scrollX, int scrollY, int oldScrollX, int oldScrollY);
     }
     public ScrollViewWithListener(Context context) {
         super(context);
@@ -28,7 +30,13 @@ public class ScrollViewWithListener extends ScrollView {
     protected void onScrollChanged(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
         super.onScrollChanged(scrollX, scrollY, oldScrollX, oldScrollY);
         if (mOnScrollChangedListener != null) {
-            mOnScrollChangedListener.onScrollChanged(this, scrollX, scrollY, oldScrollX, oldScrollY);
+            int scrollDirection;
+            if(scrollY > oldScrollY){
+                scrollDirection = SCROLL_UP;
+            }else{
+                scrollDirection = SCROLL_DOWN;
+            }
+            mOnScrollChangedListener.onScrollChanged(this, scrollDirection, scrollX, scrollY, oldScrollX, oldScrollY);
         }
     }
 

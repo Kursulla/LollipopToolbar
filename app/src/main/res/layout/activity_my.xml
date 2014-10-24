@@ -2,10 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyActivity">
+    tools:context=".MyActivity"
+    android:background="#ffffff">
 
 
-    <com.example.kursulla.testmaterial.ScrollViewWithListener
+    <rs.webnet.material.ScrollViewWithListener
         android:id="@+id/scroll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,46 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/blgrd" />
-
-            <LinearLayout
-                android:id="@+id/top_menu"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:background="#ffffff">
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_launcher" />
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_launcher" />
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_launcher" />
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
+            android:orientation="vertical"
+            android:paddingTop="280dp">
 
             <TextView
                 android:id="@+id/text"
@@ -61,7 +24,68 @@
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros.Cras ut accumsan orci, vel mattis sapien. Duis blandit metus orci, vitae ullamcorper nibh mattis eu. Nullam aliquam posuere mauris, at pellentesque quam mattis dignissim. Curabitur nec accumsan justo, ac vulputate augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam aliquet ac mi et mattis. Suspendisse ullamcorper pharetra euismod. Phasellus felis metus, ornare eget ultricies a, venenatis ullamcorper arcu. Praesent molestie odio vel nisl vehicula, eget ultricies lectus dictum. Pellentesque eu mi vel nulla consequat pharetra a id velit. Cras a dignissim nibh. Etiam est metus, dapibus id ex et, pulvinar eleifend est. Maecenas nibh sem, sagittis sit amet congue vitae.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros.Cras ut accumsan orci, vel mattis sapien. Duis blandit metus orci, vitae ullamcorper nibh mattis eu. Nullam aliquam posuere mauris, at pellentesque quam mattis dignissim. Curabitur nec accumsan justo, ac vulputate augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam aliquet ac mi et mattis. Suspendisse ullamcorper pharetra euismod. Phasellus felis metus, ornare eget ultricies a, venenatis ullamcorper arcu. Praesent molestie odio vel nisl vehicula, eget ultricies lectus dictum. Pellentesque eu mi vel nulla consequat pharetra a id velit. Cras a dignissim nibh. Etiam est metus, dapibus id ex et, pulvinar eleifend est. Maecenas nibh sem, sagittis sit amet congue vitae.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a arcu augue. Suspendisse luctus sapien eget augue tempus, eget bibendum tellus euismod. Maecenas nisl libero, dictum vel commodo vel, ornare quis justo. Proin posuere, mi vel molestie cursus, ante lacus vehicula quam, nec efficitur velit neque volutpat ligula. Pellentesque finibus enim in erat lobortis, vel imperdiet ligula mattis. Curabitur ut molestie sem. In hac habitasse platea dictumst. Vivamus porta arcu vel tortor euismod, vel sagittis ex volutpat. Pellentesque enim enim, sodales quis dapibus vel, imperdiet non eros.Cras ut accumsan orci, vel mattis sapien. Duis blandit metus orci, vitae ullamcorper nibh mattis eu. Nullam aliquam posuere mauris, at pellentesque quam mattis dignissim. Curabitur nec accumsan justo, ac vulputate augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam aliquet ac mi et mattis. Suspendisse ullamcorper pharetra euismod. Phasellus felis metus, ornare eget ultricies a, venenatis ullamcorper arcu. Praesent molestie odio vel nisl vehicula, eget ultricies lectus dictum. Pellentesque eu mi vel nulla consequat pharetra a id velit. Cras a dignissim nibh. Etiam est metus, dapibus id ex et, pulvinar eleifend est. Maecenas nibh sem, sagittis sit amet congue vitae." />
 
         </LinearLayout>
-    </com.example.kursulla.testmaterial.ScrollViewWithListener>
+    </rs.webnet.material.ScrollViewWithListener>
+
+    <RelativeLayout
+        android:id="@+id/sticky_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blgrd" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Profile"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/abc_text_size_headline_material"
+            android:shadowColor="#bb000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/top_menu"/>
+
+        <LinearLayout
+            android:id="@+id/top_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/image"
+            android:background="#ffffff"
+            android:gravity="center">
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_awesome_toolbar"
